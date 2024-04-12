@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register::page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <div align="center" style="margin-top: 150px;">
+                    <h3>Create an Account</h3>
+                </div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for category, message in messages %}
+                        <div class="alert {% if category == 'error' %}alert-danger{% elif category == 'success' %}alert-success{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endwith %}
+                <form action="/register" method="post">
+                    <label for="fullname">Fullname:</label>
+                    <input type="text" class="form-control" id="fullname" name="fullname"><br>
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" id="email" name="email"><br>
+                    <label for="password">Password:</label>
+                    <input type="password"  class="form-control" id="password" name="password"><br>
+                    <div align="center">
+                        <input type="checkbox"> I agree to the processing of my personal data in line with GDPR and HIPAA regulations.
+                    </div>
+                    <br>
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Register">
+                    <div align="center">Already have an account?, click <a href="/login">here</a> to login</div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

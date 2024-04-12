@@ -1,0 +1,31 @@
+<!-- child.html -->
+{% extends 'dashboard.html' %}
+
+{% block title %}
+    History::Page
+{% endblock %}
+
+{% block content %}
+        <div class="col-md-10" style="margin-top: 20px;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">{{ name }}</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+
+            </div>
+          </div>
+          <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/history">History</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{ name }}</li>
+              </ol>
+          </nav>
+            <div class="row">
+                {% for item in data %}
+                <div class="col-md-2 mb-2">
+                    <img src="{{ url_for('static', filename='uploads/' ~ item[0]) }}" style="width: 100%; height: 250px;" class="img-fluid">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+{% endblock %}

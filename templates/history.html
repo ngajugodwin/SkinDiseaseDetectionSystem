@@ -1,0 +1,43 @@
+<!-- child.html -->
+{% extends 'dashboard.html' %}
+
+{% block title %}
+    History::Page
+{% endblock %}
+
+{% block content %}
+        <div class="col-md-10" style="margin-top: 20px;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">History</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+
+            </div>
+          </div>
+          <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">History</li>
+              </ol>
+          </nav>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Images</th>
+                  <th scope="col">Diseases</th>
+                  <th scope="col">Operation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item[1] }}</td>
+                        <td>{{ item[2] }}</td>
+                        <td><a href="/images/{{ item[2] }}/{{ item[0] }}" class="btn btn-primary">View</a></td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+
+{% endblock %}

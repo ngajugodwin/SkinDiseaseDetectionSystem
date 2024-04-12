@@ -1,0 +1,81 @@
+<!-- child.html -->
+{% extends 'dashboard.html' %}
+
+{% block title %}
+    Dashboard::Page
+{% endblock %}
+
+{% block content %}
+        <div class="col-md-6" style="margin-top: 20px;">
+            <div class="alert alert-warning" role="alert" style="max-width: 690px;">
+              Please upload images under 2MB in PNG, JPEG, or JPG formats. Thank you for your cooperation.
+            </div>
+            <form action="/recognize" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01"><i class="fa fa-file"></i> &nbsp;Upload</span>
+                  </div>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input form-control" name="image" id="inputGroupFile01"
+                      aria-describedby="inputGroupFileAddon01" style="max-width: 600px;">
+                    <label class="custom-file-label" for="inputGroupFile01" style="max-width: 600px;">Choose file</label>
+                  </div>
+                </div><br>
+                <button type="submit" class="btn btn-primary">Diagnose</button>
+            </form><br>
+            {% with messages = get_flashed_messages() %}
+                 {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="max-width: 690px;">
+                              <small>{{ message }}</small>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                          {% endfor %}
+                 {% endif %}
+            {% endwith %}<br>
+            <div style="max-width: 690px;">
+                {% if data %}
+                    <div><b>Name: </b>{{ data[2] }}</div><br/>
+                    <div><b>Causes: </b>{{ data[3] }}</div><br/>
+                    <div><b>Prevention: </b>{{ data[4] }}</div><br/>
+                    <div><b>Treatment: </b>{{ data[5] }}</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4" style="margin-top: 20px;">
+            {% if filename %}
+                <img src="{{ url_for('static', filename='uploads/') ~ filename }}" style="width: 300px; height: 300px;"> <br/><br/>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalSlide">Mail</button>
+            {% endif %}
+        </div>
+    <div class="modal fade" id="ModalSlide" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-slideout" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title align-right" id="exampleModalLabel">Send Email</h5>
+
+      </div>
+      <div class="modal-body" style="margin-top:20px;">
+        <div class="alert alert-warning" role="alert"><small>Please input the email address of the recepient you want to forward this report to</small></div>
+        <form id="emailform" method="post">
+            <input type="text" id="receiver_email" class="form-control" name="receiver_email" placeholder="Receiver email"/><br/>
+            {% if data %}
+            <input type="hidden" id="name" value="{{ data[2] }}"/>
+            <input type="hidden" value="{{ data[3] }}" id="causes"/>
+            <input type="hidden" value="{{ data[4] }}" id="prevention"/>
+            <input type="hidden" value="{{ data[5] }}" id="treatment"/>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary" id="send_email_btn">Send email</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
