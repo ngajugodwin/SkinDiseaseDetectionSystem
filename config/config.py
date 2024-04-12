@@ -12,14 +12,14 @@ class Config:
     # Database configuration
     DB_NAME = 'skindiseases_db'
     DB_USER = 'postgres'
-    DB_PASSWORD = '@AdminLPS50@AdminLPS50'
+    DB_PASSWORD = 'DB_PASSWORD'
     DB_HOST = 'localhost'
     DB_PORT = '5432'
     #Flask-Mail Configuration
     MAIL_SERVER = 'sandbox.smtp.mailtrap.io'
     MAIL_PORT = 2525
     MAIL_USERNAME = '7f5e2713904294'
-    MAIL_PASSWORD = 'eb3575fc8fbfbe'
+    MAIL_PASSWORD = 'MAILTRAP_PASSWORD'
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
     #Mail config
